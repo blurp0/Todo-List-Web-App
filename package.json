@@ -9,14 +9,21 @@
   },
   "scripts": {
     "todo": "node bin/todo.js",
+    "dev:server": "node --watch server/index.js",
+    "dev:web": "node -e \"console.error('Web app is added in Phase 6. Use npm run dev:server for now.'); process.exit(1)\"",
+    "dev": "npm run dev:server",
+    "start:server": "node server/index.js",
     "lint": "oxlint",
     "test": "node --test"
   },
   "dependencies": {
     "chalk": "^5.4.1",
-    "commander": "^13.1.0"
+    "commander": "^13.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "oxlint": "^1.69.0"
   },
   "engines": {
