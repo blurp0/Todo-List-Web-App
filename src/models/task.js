@@ -7,6 +7,13 @@ export class ValidationError extends Error {
   }
 }
 
+export class TaskNotFoundError extends Error {
+  constructor(id) {
+    super(`Task not found: ${id}`)
+    this.name = 'TaskNotFoundError'
+  }
+}
+
 export function validateTitle(title) {
   const trimmed = title?.trim()
 

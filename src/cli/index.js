@@ -1,11 +1,21 @@
+import { stdin as input, stdout as output } from 'node:process'
+import { createInterface } from 'node:readline/promises'
 import { readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import chalk from 'chalk'
 import { Command } from 'commander'
-import { ValidationError } from '../models/task.js'
+import { TaskNotFoundError, ValidationError } from '../models/task.js'
 import { TaskService } from '../services/taskService.js'
-import { formatTaskAdded, formatTaskList } from './formatters.js'
+import {
+  formatClearCancelled,
+  formatTaskAdded,
+  formatTaskCompleted,
+  formatTaskDeleted,
+  formatTaskList,
+  formatTasksCleared,
+  formatTaskUncompleted,
+} from './formatters.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -18,7 +28,7 @@ const taskService = new TaskService()
 
 function handleError(error) {
   const message =
-    error instanceof ValidationError
+    error instanceof ValidationError || error instanceof TaskNotFoundError
       ? error.message
       : error.message || 'Something went wrong.'
 
@@ -27,10 +37,32 @@ function handleError(error) {
 }
 
 function resolveListFilter(options) {
-  if (options.all) return 'all'
-  if (options.done) return 'done'
-  if (options.active) return 'active'
-  return 'active'
+  const selected = [
+    options.all && 'all',
+    options.active && 'active',
+    options.done && 'done',
+  ].filter(Boolean)
+
+  if (selected.length > 1) {
+    throw new ValidationError(
+      'Use only one filter: --all, --active, or --done.',
+    )
+  }
+
+  return selected[0] ?? 'active'
+}
+
+async function confirmClear() {
+  const rl = createInterface({ input, output })
+
+  try {
+    const answer = await rl.question(
+      'Are you sure you want to delete all tasks? (y/N) ',
+    )
+    return answer.trim().toLowerCase() === 'y'
+  } finally {
+    rl.close()
+  }
 }
 
 export function run(argv) {
@@ -64,7 +96,68 @@ export function run(argv) {
       try {
         const filter = resolveListFilter(options)
         const tasks = taskService.list(filter)
-        console.log(formatTaskList(tasks))
+        console.log(formatTaskList(tasks, filter))
+      } catch (error) {
+        handleError(error)
+      }
+    })
+
+  program
+    .command('done')
+    .description('Mark a task as completed')
+    .argument('<id>', 'Task ID')
+    .action((id) => {
+      try {
+        const task = taskService.complete(id)
+        console.log(formatTaskCompleted(task))
+      } catch (error) {
+        handleError(error)
+      }
+    })
+
+  program
+    .command('undo')
+    .description('Mark a task as active again')
+    .argument('<id>', 'Task ID')
+    .action((id) => {
+      try {
+        const task = taskService.uncomplete(id)
+        console.log(formatTaskUncompleted(task))
+      } catch (error) {
+        handleError(error)
+      }
+    })
+
+  program
+    .command('delete')
+    .description('Delete a task')
+    .argument('<id>', 'Task ID')
+    .action((id) => {
+      try {
+        const task = taskService.delete(id)
+        console.log(formatTaskDeleted(task))
+      } catch (error) {
+        handleError(error)
+      }
+    })
+
+  program
+    .command('clear')
+    .description('Delete all tasks')
+    .option('--force', 'Skip confirmation prompt')
+    .action(async (options) => {
+      try {
+        if (!options.force) {
+          const confirmed = await confirmClear()
+
+          if (!confirmed) {
+            console.log(formatClearCancelled())
+            return
+          }
+        }
+
+        const count = taskService.clear()
+        console.log(formatTasksCleared(count))
       } catch (error) {
         handleError(error)
       }
@@ -77,5 +170,5 @@ export function run(argv) {
       program.outputHelp()
     })
 
-  program.parse(argv)
+  return program.parseAsync(argv)
 }
