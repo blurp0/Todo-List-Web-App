@@ -8,16 +8,22 @@ Welcome to the **To-Do List App**, an open-source, dual-interface productivity t
 
 Both interfaces share the same local JSON store, meaning you can add a task in the terminal and check it off in the browser.
 
-## Video Preview
-
-<video src="./Todo-List.mp4" controls="controls" width="100%"></video>
-
 ## Features
 
 - **Dual Interfaces:** Choose between a Command-Line Interface or a Web UI.
 - **Shared Local State:** All data is saved to your local machine (`data/tasks.json`), shared between the CLI and the Web backend.
-- **Tech Stack:** Built with Node.js (v20+), Express, React 19, and Vite.
 - **Test-Driven:** Unit tests for core services using Node's native test runner.
+
+## Tech Stack
+
+This project was built using modern tools to ensure speed and maintainability:
+
+- **Frontend:** [React 19](https://react.dev/), [Vite](https://vitejs.dev/), CSS Modules
+- **Backend (API):** [Node.js](https://nodejs.org/) (v20+), [Express](https://expressjs.com/)
+- **CLI Framework:** [Commander](https://github.com/tj/commander.js/)
+- **Styling:** Custom CSS with Glassmorphism, Google Fonts (*Outfit*, *Inter*)
+- **Storage:** Local JSON file persistence
+- **Testing:** Node.js native test runner (`node:test`)
 
 ## Installation
 
@@ -82,3 +88,9 @@ npm test
 ## Contributing
 
 We welcome contributions from the community! Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct, branching strategy, and the process for submitting pull requests.
+
+## Video Preview
+
+Click the link below to watch a demonstration of the application in action:
+
+[**Watch the Video Preview (Todo-List.mp4)**](C:\Users\Jomari\Desktop\React-Project\to-do-list-cli\Todo-List.mp4)
