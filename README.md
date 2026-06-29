@@ -91,6 +91,4 @@ We welcome contributions from the community! Please read our [Contributing Guide
 
 ## Video Preview
 
-Click the link below to watch a demonstration of the application in action:
-
-[**Watch the Video Preview (Todo-List.mp4)**](C:\Users\Jomari\Desktop\React-Project\to-do-list-cli\Todo-List.mp4)
+https://github.com/user-attachments/assets/5f6eac97-aa3f-47a4-bf8a-64eb3d5318e7
