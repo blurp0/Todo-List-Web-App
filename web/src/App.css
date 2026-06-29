@@ -1,17 +1,31 @@
 .app {
   min-height: 100vh;
   padding: var(--space-4);
+  /* Modern dynamic background */
+  background: radial-gradient(circle at 15% 50%, rgba(129, 140, 248, 0.15), transparent 25%),
+              radial-gradient(circle at 85% 30%, rgba(52, 211, 153, 0.1), transparent 25%);
+  background-color: var(--color-bg);
 }
 
 .app__container {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
+  
+  /* Glassmorphism */
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  
+  border: var(--glass-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
   overflow: hidden;
+  transition: transform 0.3s var(--transition-bounce), box-shadow 0.3s ease;
+}
+
+.app__container:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
 .app__main {
@@ -22,17 +36,37 @@
 .app__section {
   padding: var(--space-4) var(--space-6);
   border-bottom: 1px solid var(--color-border);
+  position: relative;
 }
 
 .app__section--list {
   padding: 0;
+  min-height: 200px; /* give some room for empty state / loading */
+}
+
+.app__loading, .app__error {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+.app__error {
+  color: var(--color-danger);
+  background: rgba(248, 113, 113, 0.1);
 }
 
 .app__footer {
   padding: var(--space-4) var(--space-6) var(--space-6);
   border-top: 1px solid var(--color-border);
-  background: var(--color-bg);
+  background: rgba(15, 23, 42, 0.3); /* slightly darker than surface */
   min-height: 56px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (min-width: 480px) {

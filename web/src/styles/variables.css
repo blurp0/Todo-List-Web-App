@@ -1,27 +1,28 @@
 :root {
-  /* Colors */
-  --color-primary: #4f46e5;
-  --color-primary-hover: #4338ca;
-  --color-primary-ring: rgba(79, 70, 229, 0.25);
-  --color-success: #16a34a;
-  --color-danger: #dc2626;
-  --color-danger-hover: #b91c1c;
-  --color-bg: #f9fafb;
-  --color-surface: #ffffff;
-  --color-text: #111827;
-  --color-text-secondary: #6b7280;
-  --color-border: #e5e7eb;
-  --color-row-hover: #f3f4f6;
+  /* Colors - Premium Dark Mode */
+  --color-primary: #818cf8; /* indigo-400 */
+  --color-primary-hover: #a5b4fc;
+  --color-primary-ring: rgba(129, 140, 248, 0.4);
+  --color-success: #34d399; /* emerald-400 */
+  --color-danger: #f87171; /* red-400 */
+  --color-danger-hover: #fca5a5;
+  --color-bg: #0f172a; /* slate-900 */
+  --color-surface: rgba(30, 41, 59, 0.7); /* slate-800 with opacity for glass */
+  --color-surface-hover: rgba(51, 65, 85, 0.8);
+  --color-text: #f8fafc; /* slate-50 */
+  --color-text-secondary: #94a3b8; /* slate-400 */
+  --color-border: rgba(148, 163, 184, 0.1);
+  --color-row-hover: rgba(30, 41, 59, 0.9);
 
   /* Typography */
-  --font-family: 'Inter', system-ui, sans-serif;
+  --font-family: 'Outfit', 'Inter', system-ui, sans-serif;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.5rem;
 
   /* Layout */
-  --radius: 8px;
+  --radius: 12px; /* Softer radius */
   --max-width: 640px;
   --space-1: 4px;
   --space-2: 8px;
@@ -30,7 +31,11 @@
   --space-6: 24px;
   --space-8: 32px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  /* Shadows and Effects */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 15px rgba(129, 140, 248, 0.3);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+  --glass-backdrop: blur(12px);
+  --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }

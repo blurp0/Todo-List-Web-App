@@ -1,28 +1,12 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import ConfirmModal from './components/ConfirmModal'
 import FilterTabs from './components/FilterTabs'
 import FooterActions from './components/FooterActions'
 import Header from './components/Header'
 import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
-import {
-  filterTasks,
-  getTaskCounts,
-  MOCK_TASKS,
-} from './data/mockTasks'
+import { useTasks } from './hooks/useTasks'
 import './App.css'
-
-function createTask(title) {
-  const now = new Date().toISOString()
-
-  return {
-    id: crypto.randomUUID().slice(0, 8),
-    title,
-    completed: false,
-    createdAt: now,
-    updatedAt: now,
-  }
-}
 
 function getConfirmDialog(confirmAction, handlers) {
   if (!confirmAction) {
@@ -41,7 +25,7 @@ function getConfirmDialog(confirmAction, handlers) {
           : `Move "${task.title}" back to your active list?`,
         confirmLabel: markingDone ? 'Mark done' : 'Mark active',
         isDanger: false,
-        onConfirm: () => handlers.toggle(task.id),
+        onConfirm: () => handlers.toggle(task.id, markingDone),
       }
     }
     case 'delete':
@@ -74,53 +58,46 @@ function getConfirmDialog(confirmAction, handlers) {
 }
 
 export default function App() {
-  const [tasks, setTasks] = useState(MOCK_TASKS)
   const [filter, setFilter] = useState('active')
   const [confirmAction, setConfirmAction] = useState(null)
-
-  const counts = useMemo(() => getTaskCounts(tasks), [tasks])
-  const filteredTasks = useMemo(
-    () => filterTasks(tasks, filter),
-    [tasks, filter],
-  )
+  
+  const {
+    filteredTasks,
+    counts,
+    loading,
+    error,
+    addTask,
+    toggleTask,
+    deleteTask,
+    clearAll,
+    clearCompleted
+  } = useTasks(filter)
 
   function closeConfirm() {
     setConfirmAction(null)
   }
 
   function handleAdd(title) {
-    setTasks((current) => [createTask(title), ...current])
+    addTask(title)
   }
 
-  function handleToggle(id) {
-    setTasks((current) =>
-      current.map((task) => {
-        if (task.id !== id) {
-          return task
-        }
-
-        return {
-          ...task,
-          completed: !task.completed,
-          updatedAt: new Date().toISOString(),
-        }
-      }),
-    )
+  function handleToggle(id, completed) {
+    toggleTask(id, completed)
     closeConfirm()
   }
 
   function handleDelete(id) {
-    setTasks((current) => current.filter((task) => task.id !== id))
+    deleteTask(id)
     closeConfirm()
   }
 
   function handleClearCompleted() {
-    setTasks((current) => current.filter((task) => !task.completed))
+    clearCompleted()
     closeConfirm()
   }
 
   function handleClearAll() {
-    setTasks([])
+    clearAll()
     closeConfirm()
   }
 
@@ -137,6 +114,7 @@ export default function App() {
         <Header activeCount={counts.active} />
 
         <main className="app__main">
+          {error && <div className="app__error">Error: {error}</div>}
           <section className="app__section" aria-label="Add task">
             <TaskForm onAdd={handleAdd} />
           </section>
@@ -150,16 +128,20 @@ export default function App() {
           </section>
 
           <section className="app__section app__section--list" aria-label="Task list">
-            <TaskList
-              tasks={filteredTasks}
-              filter={filter}
-              onToggleRequest={(task) =>
-                setConfirmAction({ type: 'toggle', task })
-              }
-              onDeleteRequest={(task) =>
-                setConfirmAction({ type: 'delete', task })
-              }
-            />
+            {loading && filteredTasks.length === 0 ? (
+              <div className="app__loading">Loading tasks...</div>
+            ) : (
+              <TaskList
+                tasks={filteredTasks}
+                filter={filter}
+                onToggleRequest={(task) =>
+                  setConfirmAction({ type: 'toggle', task })
+                }
+                onDeleteRequest={(task) =>
+                  setConfirmAction({ type: 'delete', task })
+                }
+              />
+            )}
           </section>
         </main>
 
