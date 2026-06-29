@@ -53,18 +53,18 @@ Both interfaces share the same business logic and persistent storage so tasks st
 
 - [x] Add new task
 - [x] View added tasks (in-memory)
-- [ ] Mark task as completed
-- [ ] Delete task and clear all tasks
-- [ ] Persistent storage across sessions
+- [x] Mark task as completed
+- [x] Delete task and clear all tasks
+- [x] Persistent storage across sessions
 
 **Web UI**
 
-- [ ] Add new task
-- [ ] View added tasks
-- [ ] Mark task as completed
-- [ ] Delete task and clear all tasks
-- [ ] Filter tasks (All / Active / Done)
-- [ ] Persistent storage across sessions
+- [x] Add new task
+- [x] View added tasks
+- [x] Mark task as completed
+- [x] Delete task and clear all tasks
+- [x] Filter tasks (All / Active / Done)
+- [x] Persistent storage across sessions
 
 ---
 
@@ -454,34 +454,13 @@ All errors print to `stderr` and exit with code `1`.
 
 ---
 
-## 12. Development Phases and Timeline
+## 12. Development Phases
 
-**Total estimated timeline:** 6–8 weeks (part-time, ~10–15 hours per week).
-
-Phases 1–2 (CLI core) are **complete**. Remaining work spans CLI completion, shared persistence, API, and React UI.
-
-```mermaid
-gantt
-    title To-Do List App Development Timeline
-    dateFormat YYYY-MM-DD
-    section CLI
-    Phase1_Setup           :done, p1, 2026-06-30, 3d
-    Phase2_AddList           :done, p2, after p1, 5d
-    Phase3_Lifecycle         :active, p3, after p2, 4d
-    Phase4_Persistence       :p4, after p3, 3d
-    section Backend
-    Phase5_API               :p5, after p4, 4d
-    section WebUI
-    Phase6_ReactSetup        :p6, after p5, 3d
-    Phase7_CoreComponents    :p7, after p6, 5d
-    Phase8_FeatureIntegration:p8, after p7, 5d
-    section Release
-    Phase9_PolishAndTesting  :p9, after p8, 5d
-```
+**All 9 phases are complete.** The application is production-ready with a fully functional CLI, REST API, and React Web UI.
 
 ---
 
-### Phase 1 — CLI Project Setup (Days 1–3) ✅ Complete
+### Phase 1 — CLI Project Setup ✅ Complete
 
 **Goal:** Runnable CLI skeleton.
 
@@ -489,7 +468,7 @@ gantt
 
 ---
 
-### Phase 2 — Core CRUD: Add and List (Days 4–8) ✅ Complete
+### Phase 2 — Core CRUD: Add and List ✅ Complete
 
 **Goal:** Users can add and view tasks in memory via CLI.
 
@@ -497,7 +476,7 @@ gantt
 
 ---
 
-### Phase 3 — CLI Lifecycle Commands (Days 9–12) ✅ Complete
+### Phase 3 — CLI Lifecycle Commands ✅ Complete
 
 **Goal:** Full task lifecycle via CLI.
 
@@ -517,7 +496,7 @@ gantt
 
 ---
 
-### Phase 4 — Persistent Storage (Days 13–15) ✅ Complete
+### Phase 4 — Persistent Storage ✅ Complete
 
 **Goal:** Tasks survive app restarts (CLI and future API).
 
@@ -533,7 +512,7 @@ gantt
 
 ---
 
-### Phase 5 — REST API Layer (Days 16–19) ✅ Complete
+### Phase 5 — REST API Layer ✅ Complete
 
 **Goal:** Expose `TaskService` over HTTP for the React app.
 
@@ -553,7 +532,7 @@ gantt
 
 ---
 
-### Phase 6 — React Project Setup (Days 20–22) ✅ Complete
+### Phase 6 — React Project Setup ✅ Complete
 
 **Goal:** Vite + React app scaffolded with design system in place.
 
@@ -575,7 +554,7 @@ gantt
 
 ---
 
-### Phase 7 — Core UI Components (Days 23–27) ✅ Complete
+### Phase 7 — Core UI Components ✅ Complete
 
 **Goal:** Build all React components per the UI/UX spec (static data first).
 
@@ -595,7 +574,7 @@ gantt
 
 ---
 
-### Phase 8 — Web Feature Integration (Days 28–32)
+### Phase 8 — Web Feature Integration ✅ Complete
 
 **Goal:** Connect React UI to the live API; full feature parity with CLI.
 
@@ -616,7 +595,7 @@ gantt
 
 ---
 
-### Phase 9 — Polish, Testing, and Documentation (Days 33–37)
+### Phase 9 — Polish, Testing, and Documentation ✅ Complete
 
 **Goal:** Production-ready v1 release.
 
@@ -634,17 +613,17 @@ gantt
 
 ## 13. Phase Summary
 
-| Phase | Duration | Status | Deliverable |
-|-------|----------|--------|-------------|
-| 1 — CLI Setup | Days 1–3 | ✅ Done | Runnable CLI skeleton |
-| 2 — Add and List | Days 4–8 | ✅ Done | In-memory add and list |
-| 3 — CLI Lifecycle | Days 9–12 | In progress | done, delete, clear commands |
-| 4 — Persistence | Days 13–15 | Pending | Shared JSON file storage |
-| 5 — REST API | Days 16–19 | Pending | Express API for web |
-| 6 — React Setup | Days 20–22 | Pending | Vite + React + design tokens |
-| 7 — UI Components | Days 23–27 | Pending | Full component library |
-| 8 — Web Integration | Days 28–32 | Pending | Live API-connected UI |
-| 9 — Polish and Release | Days 33–37 | Pending | Tests, docs, v1 release |
+| Phase | Status | Deliverable |
+|-------|--------|-------------|
+| 1 — CLI Setup | ✅ Done | Runnable CLI skeleton |
+| 2 — Add and List | ✅ Done | In-memory add and list |
+| 3 — CLI Lifecycle | ✅ Done | done, delete, clear commands |
+| 4 — Persistence | ✅ Done | Shared JSON file storage |
+| 5 — REST API | ✅ Done | Express API for web |
+| 6 — React Setup | ✅ Done | Vite + React + design tokens |
+| 7 — UI Components | ✅ Done | Full component library |
+| 8 — Web Integration | ✅ Done | Live API-connected UI |
+| 9 — Polish and Release | ✅ Done | Tests, docs, v1 release |
 
 ---
 
@@ -671,14 +650,17 @@ npm run todo -- help
 npm run todo -- add "Buy groceries"
 npm run todo -- list
 
-# Run API server (after Phase 5)
+# Run API server only
 npm run dev:server
 
-# Run React web app (after Phase 6)
+# Run React web app only
 npm run dev:web
 
-# Run both together (after Phase 5)
+# Run both concurrently (recommended)
 npm run dev
+
+# Run unit tests
+npm test
 ```
 
-Refer to the phase sections above for what to build next.
+The app is fully operational. Navigate to `http://localhost:5173` after running `npm run dev` to use the Web UI.
