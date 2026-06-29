@@ -7,6 +7,7 @@ import chalk from 'chalk'
 import { Command } from 'commander'
 import { TaskNotFoundError, ValidationError } from '../models/task.js'
 import { TaskService } from '../services/taskService.js'
+import { StorageError } from '../storage/fileStorage.js'
 import {
   formatClearCancelled,
   formatTaskAdded,
@@ -24,11 +25,13 @@ const pkg = JSON.parse(
   readFileSync(join(__dirname, '../../package.json'), 'utf8'),
 )
 
-const taskService = new TaskService()
+const taskService = TaskService.create()
 
 function handleError(error) {
   const message =
-    error instanceof ValidationError || error instanceof TaskNotFoundError
+    error instanceof ValidationError ||
+    error instanceof TaskNotFoundError ||
+    error instanceof StorageError
       ? error.message
       : error.message || 'Something went wrong.'
 
