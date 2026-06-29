@@ -1,27 +1,25 @@
-# React + Vite
+# To-Do List App (CLI + Web)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-# 📝 To-Do List App (CLI + Web)
-
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D%2020-brightgreen.svg)
 ![React Version](https://img.shields.io/badge/React-19-blue.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-Welcome to the **To-Do List App**, an open-source, dual-interface productivity tool built by **The To-Do List Core Team**. This project offers both a lightning-fast CLI for terminal power users and a beautiful, modern React-based Web UI for visual task management.
+Welcome to the **To-Do List App**, an open-source, dual-interface productivity tool built by the To-Do List Core Team. This project offers a Command-Line Interface (CLI) and a React-based Web UI for task management.
 
-Both interfaces seamlessly share the exact same local JSON store, meaning you can add a task in the terminal and instantly check it off in the browser.
+Both interfaces share the same local JSON store, meaning you can add a task in the terminal and check it off in the browser.
 
-## 🚀 Features
+## Video Preview
 
-- **Dual Interfaces:** Choose between a robust Command-Line Interface or a stunning Glassmorphic Web UI.
-- **Shared Local State:** Zero cloud dependencies. All data is saved instantly to your local machine (`data/tasks.json`), shared between the CLI and the Web backend.
-- **Modern Tech Stack:** Built with Node.js (v20+), Express, React 19, and Vite.
-- **Test-Driven:** Comprehensive unit tests for our core services using Node's native test runner.
+<video src="./Todo-List.mp4" controls="controls" width="100%"></video>
 
-## 📦 Installation
+## Features
+
+- **Dual Interfaces:** Choose between a Command-Line Interface or a Web UI.
+- **Shared Local State:** All data is saved to your local machine (`data/tasks.json`), shared between the CLI and the Web backend.
+- **Tech Stack:** Built with Node.js (v20+), Express, React 19, and Vite.
+- **Test-Driven:** Unit tests for core services using Node's native test runner.
+
+## Installation
 
 To get started with the project locally, ensure you have **Node.js 20+** installed.
 
@@ -33,15 +31,15 @@ cd to-do-list-cli
 # Install dependencies
 npm install
 
-# Link the CLI globally (Optional but recommended)
+# Link the CLI globally (Optional)
 npm link
 ```
 
-## 💻 Usage
+## Usage
 
 ### 1. Command-Line Interface (CLI)
 
-If you ran `npm link`, you can simply run `todo` anywhere in your terminal. Otherwise, use `npm run todo --`.
+If you ran `npm link`, you can run `todo` anywhere in your terminal. Otherwise, use `npm run todo --`.
 
 ```bash
 todo add "Buy groceries"
@@ -54,7 +52,7 @@ todo clear
 
 ### 2. Web Interface (React + Express)
 
-To run the beautiful web application, use our concurrent dev script which starts both the Express API and the Vite React app.
+To run the web application, use our concurrent dev script which starts both the Express API and the Vite React app.
 
 ```bash
 npm run dev
@@ -62,7 +60,7 @@ npm run dev
 
 Then, open your browser and navigate to `http://localhost:5173`.
 
-## 🏗️ Architecture
+## Architecture
 
 The application is structured into clearly separated layers:
 - **CLI Layer (`src/cli/`)**: Commander-based parser.
@@ -73,7 +71,7 @@ The application is structured into clearly separated layers:
 
 For an in-depth look at our technical decisions and phase planning, please read the [Architecture Document](./ARCHITECTURE.md).
 
-## 🧪 Testing
+## Testing
 
 We use the native `node:test` runner. To run the unit test suite:
 
@@ -81,12 +79,6 @@ We use the native `node:test` runner. To run the unit test suite:
 npm test
 ```
 
-## 🤝 Contributing
+## Contributing
 
-We welcome contributions from the community! Whether you want to add due dates, categories, or a dark mode toggle, we'd love to see your PR.
-
-Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct, branching strategy, and the process for submitting pull requests.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+We welcome contributions from the community! Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct, branching strategy, and the process for submitting pull requests.
