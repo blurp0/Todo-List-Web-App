@@ -10,8 +10,8 @@
   "scripts": {
     "todo": "node bin/todo.js",
     "dev:server": "node --watch server/index.js",
-    "dev:web": "node -e \"console.error('Web app is added in Phase 6. Use npm run dev:server for now.'); process.exit(1)\"",
-    "dev": "npm run dev:server",
+    "dev:web": "npm run dev --prefix web",
+    "dev": "concurrently -n server,web -c blue,magenta \"npm:dev:server\" \"npm:dev:web\"",
     "start:server": "node server/index.js",
     "lint": "oxlint",
     "test": "node --test"

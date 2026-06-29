@@ -497,7 +497,7 @@ gantt
 
 ---
 
-### Phase 3 — CLI Lifecycle Commands (Days 9–12)
+### Phase 3 — CLI Lifecycle Commands (Days 9–12) ✅ Complete
 
 **Goal:** Full task lifecycle via CLI.
 
@@ -517,7 +517,7 @@ gantt
 
 ---
 
-### Phase 4 — Persistent Storage (Days 13–15)
+### Phase 4 — Persistent Storage (Days 13–15) ✅ Complete
 
 **Goal:** Tasks survive app restarts (CLI and future API).
 
@@ -533,7 +533,7 @@ gantt
 
 ---
 
-### Phase 5 — REST API Layer (Days 16–19)
+### Phase 5 — REST API Layer (Days 16–19) ✅ Complete
 
 **Goal:** Expose `TaskService` over HTTP for the React app.
 
@@ -553,7 +553,7 @@ gantt
 
 ---
 
-### Phase 6 — React Project Setup (Days 20–22)
+### Phase 6 — React Project Setup (Days 20–22) ✅ Complete
 
 **Goal:** Vite + React app scaffolded with design system in place.
 
@@ -575,7 +575,7 @@ gantt
 
 ---
 
-### Phase 7 — Core UI Components (Days 23–27)
+### Phase 7 — Core UI Components (Days 23–27) ✅ Complete
 
 **Goal:** Build all React components per the UI/UX spec (static data first).
 
